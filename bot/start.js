@@ -3,15 +3,22 @@ import { message } from "telegraf/filters";
 
 const start = (bot_token) => {
   const bot = new Telegraf(bot_token);
-  bot.start((ctx) => ctx.reply("Welcome"));
-  bot.help((ctx) => ctx.reply("Send me a sticker"));
-  bot.on(message("sticker"), (ctx) => ctx.reply("👍"));
-  bot.hears("hi", (ctx) => ctx.reply("Hey there"));
+  const welcomeMsg = `Welcome to Torrento Bot!
+- ⚡️Download torrents!
+`;
+  bot.use(Telegraf.log());
+  bot.start((ctx) => ctx.reply(welcomeMsg));
   bot.launch();
 
   // Enable graceful stop
-  process.once("SIGINT", () => bot.stop("SIGINT"));
-  process.once("SIGTERM", () => bot.stop("SIGTERM"));
+  process.once("SIGINT", () => {
+    console.log("Recieved SIGINT, Shutting down the bot gracefully");
+    bot.stop("SIGINT");
+  });
+  process.once("SIGTERM", () => {
+    console.log("Recieved SIGTERM, Shutting down the bot gracefully");
+    bot.stop("SIGTERM");
+  });
 };
 
 export default start;
