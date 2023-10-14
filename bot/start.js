@@ -8,6 +8,16 @@ const start = (bot_token) => {
 `;
   bot.use(Telegraf.log());
   bot.start((ctx) => ctx.reply(welcomeMsg));
+  bot.help((ctx) => ctx.replyWithMarkdownV2("Please send a *Magnet Link*"));
+  bot.on(message("text"), ctx => {
+    ctx.replyWithMarkdownV2("validating torrent \n" + `\`\`\`sh\n${ctx.message.text}\n\`\`\``);
+  });
+
+  // Set telegram commands
+  bot.telegram.setMyCommands([
+    { command: "/start", description: "Start the bot" },
+    { command: "/help", description: "Show help" },
+  ]);
   bot.launch();
 
   // Enable graceful stop
