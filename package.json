@@ -26,6 +26,9 @@
   "dependencies": {
     "dotenv": "^16.3.1",
     "magnet-uri": "^7.0.5",
+    "npm": "^10.2.0",
+    "run": "^1.4.0",
+    "start": "^5.1.0",
     "telegraf": "^4.14.0",
     "webtorrent": "^2.1.27"
   },
